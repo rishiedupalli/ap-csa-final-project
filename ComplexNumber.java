@@ -18,7 +18,15 @@ public class ComplexNumber {
 
     @Override
     public String toString() {
-        return x + " + i" + y;
+        if (y == 0) {
+            return "[" + x + "]";
+        } else if (x == 0) {
+            return "[" + y + "j" + "]";
+        } else if (y < 0) {
+            return "[" + x + " - " + (-y) + "j" + "]";
+        } else {
+            return "[" + x + " + " + y + "j" + "]";
+        }
     }
 }
 
@@ -55,6 +63,6 @@ class PolarComplexNumber extends ComplexNumber {
 
     @Override
     public String toString() {
-        return r + "e^(i" + theta + ")";
+        return r + "e^(j" + theta + ")";
     }
 }
