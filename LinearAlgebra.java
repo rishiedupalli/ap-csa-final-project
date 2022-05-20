@@ -13,7 +13,14 @@ public class LinearAlgebra {
     }
 
     public static ComplexNumber[] Solve(ComplexNumber[][] A, ComplexNumber[] b) {
-        ComplexNumber[] Coefficients = new ComplexNumber[b.length];
-        return Coefficients;
+        ComplexNumber[] x = new ComplexNumber[b.length];
+        // solve Ax = b for x for matrix A and vector b
+        for (int i = 0; i < b.length; i++) {
+            x[i] = new ComplexNumber(0, 0);
+            for (int j = 0; j < b.length; j++) {
+                x[i] = x[i].add(A[i][j].multiply(b[j]));
+            }
+        }
+        return x;
     }
 }

@@ -12,6 +12,14 @@ public class ComplexNumber {
         this.y = imaginary;
     }
 
+    public ComplexNumber add(ComplexNumber a) {
+        return new ComplexNumber(this.x + a.x, this.y + a.y);
+    }
+
+    public ComplexNumber multiply(ComplexNumber a) {
+        return new ComplexNumber(this.x * a.x - this.y * a.y, this.x * a.y + this.y * a.x);
+    }
+
     public double getReal() {
         return this.x;
     }
