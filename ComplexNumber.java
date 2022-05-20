@@ -1,6 +1,6 @@
 public class ComplexNumber {
-    double x = 0;
-    double y = 0;
+    private double x = 0;
+    private double y = 0;
 
     public ComplexNumber() {
         this.x = 0;
@@ -10,6 +10,27 @@ public class ComplexNumber {
     public ComplexNumber(double real, double imaginary) {
         this.x = real;
         this.y = imaginary;
+    }
+
+    public double getReal() {
+        return this.x;
+    }
+
+    public double getImaginary() {
+        return this.y;
+    }
+
+    public void setReal(double real) {
+        this.x = real;
+    }
+
+    public void setImaginary(double imaginary) {
+        this.y = imaginary;
+    }
+
+    public void pow(ComplexNumber n) {
+        
+
     }
 
     public PolarComplexNumber toPolar() {
@@ -31,8 +52,8 @@ public class ComplexNumber {
 }
 
 class PolarComplexNumber extends ComplexNumber {
-    double r = 0;
-    double theta = 0;
+    private double r = 0;
+    private double theta = 0;
 
     public PolarComplexNumber() {
         this.r = 0;
