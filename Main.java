@@ -17,10 +17,15 @@ public class Main {
             System.out.println(NthRootsOfUnity[i]);
         }
     }
+
+    public Polynomial sigma_inverse(int M, ComplexNumber MthRoot, ComplexNumber[] plaintext){
+        ComplexNumber[][] V = LinearAlgebra.ConstructVandermondeMatrix(M, MthRoot, plaintext);
+    
+        ComplexNumber[] PolynomialCoeffs = LinearAlgebra.Solve(V, plaintext);
+    
+        return new Polynomial(PolynomialCoeffs);
+    }
 }
 
-/*
-public Polynomial sigma_inverse(int M, ComplexNumber MthRoot, ComplexNumber[] plaintext) {
-    ComplexNumber[][] V = LinearAlgebra.ConstructVandermondeMatrix(M, MthRoot, plaintext);
-}
-*/
+
+

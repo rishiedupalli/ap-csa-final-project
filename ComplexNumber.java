@@ -28,9 +28,16 @@ public class ComplexNumber {
         this.y = imaginary;
     }
 
-    public void pow(ComplexNumber n) {
-        
+    public double getModulus() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
 
+    public ComplexNumber pow(double n) {
+        return new ComplexNumber(Math.pow(getModulus(), n) * ( Math.cos(n * Math.atan(y/x))), Math.pow(getModulus(), n) * (Math.sin(n * Math.atan(y/x))));
+    }
+
+    public ComplexNumber pow(ComplexNumber n) {
+        return new ComplexNumber(Math.pow(getModulus(), n.getReal()) * ( Math.cos(n.getImaginary() * Math.atan(y/x))), Math.pow(getModulus(), n.getImaginary()) * (Math.sin(n.getImaginary() * Math.atan(y/x))));
     }
 
     public PolarComplexNumber toPolar() {
@@ -58,6 +65,14 @@ class PolarComplexNumber extends ComplexNumber {
     public PolarComplexNumber() {
         this.r = 0;
         this.theta = 0;
+    }
+
+    public double getModulus() {
+        return this.r;
+    }
+
+    public double getTheta() {
+        return this.theta;
     }
 
     public PolarComplexNumber(double magnitude, double angle) {
