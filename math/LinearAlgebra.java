@@ -4,9 +4,9 @@ public class LinearAlgebra {
         ComplexNumber[][] V = new ComplexNumber[N][N];
 
         for (int i = 0; i < N; i++) {
-            ComplexNumber root = MthRootOfUnity.exponentiate(new ComplexNumber(2 * i + 1, 0));
+            ComplexNumber root = MthRootOfUnity.exponentiate((2 * i + 1));
             for (int j = 0; j < N; j++) {
-                V[i][j] = root.exponentiate(new ComplexNumber(j, 0));
+                V[i][j] = root.exponentiate(j);
             }
         }
         return V;

@@ -58,12 +58,17 @@ public class ComplexNumber {
         return new PolarComplexNumber(getModulus(), getTheta());
     }
 
-    public ComplexNumber exponentiate(ComplexNumber exponent) {
-        double c = exponent.getReal();
-        double d = exponent.getImaginary();
-        return new ComplexNumber(Math.pow(getModulus(), c/2) * Math.exp(-d * getTheta()) * Math.cos((c * getTheta()) + .5 * d * Math.log(getModulus())),
-        Math.pow(getModulus(), c/2) * Math.exp(-d * getTheta()) * Math.sin((c * getTheta()) + .5 * d * Math.log(getModulus())));  
+    public ComplexNumber exponentiate(double n) {
+        // n is the exponent
+        return new ComplexNumber(Math.pow(this.getModulus(), n) * Math.cos(n * this.getTheta()) , Math.pow(this.getModulus(), n) * Math.sin(n * this.getTheta()));
     }
+
+    // public ComplexNumber exponentiate(ComplexNumber exponent) {
+    //     double c = exponent.getReal();
+    //     double d = exponent.getImaginary();
+    //     return new ComplexNumber(Math.pow(getModulus(), c/2) * Math.exp(-d * getTheta()) * Math.cos((c * getTheta()) + .5 * d * Math.log(getModulus())),
+    //     Math.pow(getModulus(), c/2) * Math.exp(-d * getTheta()) * Math.sin((c * getTheta()) + .5 * d * Math.log(getModulus())));  
+    // }
 
     @Override
     public String toString() {

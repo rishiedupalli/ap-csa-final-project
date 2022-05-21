@@ -21,6 +21,9 @@ public class Main {
             M = Input.nextInt();
         }
 
+        ComplexNumber MthRootOfUnity = new PolarComplexNumber().getNthRootOfUnity(M);
+        System.out.println("Mth Root of Unity (Main): " + MthRootOfUnity);
+
         int N = M / 2;
 
         ComplexNumber[] vectorA = new ComplexNumber[N];
@@ -34,11 +37,14 @@ public class Main {
             System.out.println();
         }
 
+        Input.close();
         System.out.println("Vector A:");
         for(int i = 0; i < N; i++) {
-            System.out.println(vectorA[i]);
+            System.out.print(vectorA[i] + " ");
         }
+        System.out.println();
 
+        System.out.println("M is: " + M);
         Encoder CKKSEncoder = new Encoder(M, N, vectorA);
         Polynomial p1 = CKKSEncoder.sigma_inverse(vectorA);
         System.out.println("Polynomial p1: " + p1);
