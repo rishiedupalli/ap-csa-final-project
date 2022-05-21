@@ -14,9 +14,9 @@ public class Encoder {
     }
 
     public Polynomial sigma_inverse(ComplexNumber[] b) {
-        ComplexNumber[][] V = LinearAlgebra.ConstructVandermondeMatrix(M, N, MthRootOfUnity, b);
+        ComplexNumber[][] V = LinearAlgebra.ConstructVandermondeMatrix(M, N, MthRootOfUnity);
 
-        ComplexNumber[] Coefficients = LinearAlgebra.solve(V, b);
+        ComplexNumber[] Coefficients = LinearAlgebra.solve(N, V, b);
 
         return new Polynomial(Coefficients);
     }

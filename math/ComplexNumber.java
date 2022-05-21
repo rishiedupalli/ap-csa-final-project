@@ -30,6 +30,22 @@ public class ComplexNumber {
         return y;
     }
 
+    public ComplexNumber add(ComplexNumber other) {
+        return new ComplexNumber(this.x + other.getReal() , this.y + other.getImaginary());
+    }
+
+    public ComplexNumber subtract(ComplexNumber other) {
+        return new ComplexNumber(this.x - other.getReal() , this.y - other.getImaginary());
+    }
+
+    public ComplexNumber multiply(ComplexNumber other) {
+        return new ComplexNumber(this.x * other.getReal() - this.y * other.getImaginary() , this.x * other.getImaginary() + this.y * other.getReal());
+    }
+
+    public ComplexNumber divide(ComplexNumber other) {
+        return new ComplexNumber((this.x * other.getReal() + this.y * other.getImaginary()) / (other.getReal() * other.getReal() + other.getImaginary() * other.getImaginary()) , (this.y * other.getReal() - this.x * other.getImaginary()) / (other.getReal() * other.getReal() + other.getImaginary() * other.getImaginary()));
+    }
+
     public double getModulus() {
         return Math.sqrt(x * x + y * y);
     }

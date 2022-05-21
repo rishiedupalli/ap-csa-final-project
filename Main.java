@@ -25,7 +25,7 @@ public class Main {
 
         // take input vector of complex numbers
         ComplexNumber[] vectorA = new ComplexNumber[N];
-        System.out.println("Enter vector (A) of complex numbers");
+        System.out.println("Enter vector (A) of M / 2 complex numbers");
         for(int i = 0; i < N; i++) {
             System.out.print("Real Part: ");
             double real = Input.nextDouble();
@@ -37,5 +37,6 @@ public class Main {
 
         Encoder CKKSEncoder = new Encoder(M, N, vectorA);
         Polynomial p1 = CKKSEncoder.sigma_inverse(vectorA);
+        System.out.println("Polynomial p1: " + p1);
     }
 }
