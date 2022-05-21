@@ -18,14 +18,24 @@ public class Polynomial {
     @Override
     public String toString() {
         // return the polynomial as a string in the form of "a0 + a1*x + a2*x^2 + ... + an*x^n"
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i <= this.degree; i++) {
-            if (i == 0) {
-                sb.append(this.coefficients[i]);
-            } else {
-                sb.append(" + " + this.coefficients[i] + "*x^" + i);
+        String polynomial = "";
+        for (int i = 0; i < coefficients.length; i++) {
+            if (coefficients[i] != null) {
+                if (i == 0) {
+                    polynomial += coefficients[i].toString();
+                } else {
+                    if (coefficients[i].getReal() != 0) {
+                        polynomial += coefficients[i].toString();
+                    }
+                    if (i == 1) {
+                        polynomial += "*x";
+                    } else {
+                        polynomial += "*x^" + i;
+                    }
+                }
             }
         }
-        return sb.toString();
+
+        return polynomial;
     }
 }

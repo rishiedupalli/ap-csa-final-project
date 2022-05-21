@@ -23,7 +23,6 @@ public class Main {
 
         int N = M / 2;
 
-        // take input vector of complex numbers
         ComplexNumber[] vectorA = new ComplexNumber[N];
         System.out.println("Enter vector (A) of M / 2 complex numbers");
         for(int i = 0; i < N; i++) {
@@ -33,6 +32,11 @@ public class Main {
             double imaginary = Input.nextDouble();
             vectorA[i] = new ComplexNumber(real, imaginary);
             System.out.println();
+        }
+
+        System.out.println("Vector A:");
+        for(int i = 0; i < N; i++) {
+            System.out.println(vectorA[i]);
         }
 
         Encoder CKKSEncoder = new Encoder(M, N, vectorA);
