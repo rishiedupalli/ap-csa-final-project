@@ -15,24 +15,23 @@ public class Polynomial {
         this.coefficients = new ComplexNumber[degree + 1];
     }
 
+    public ComplexNumber evaluate(ComplexNumber x) {
+        ComplexNumber result = new ComplexNumber(0, 0);
+        for (int i = 0; i <= degree; i++) {
+            result = result.add(coefficients[i].multiply(x.exponentiate(i)));
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         // return the polynomial as a string in the form of "a0 + a1*x + a2*x^2 + ... + an*x^n"
         String polynomial = "";
         for (int i = 0; i < coefficients.length; i++) {
-            if (coefficients[i] != null) {
-                if (i == 0) {
-                    polynomial += coefficients[i].toString();
-                } else {
-                    if (coefficients[i].getReal() != 0) {
-                        polynomial += coefficients[i].toString();
-                    }
-                    if (i == 1) {
-                        polynomial += "*x";
-                    } else {
-                        polynomial += "*x^" + i;
-                    }
-                }
+            if (i == 0) {
+                polynomial += coefficients[i];
+            } else {
+                polynomial += " + (" + coefficients[i] + ")*x^" + i;
             }
         }
 

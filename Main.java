@@ -48,5 +48,10 @@ public class Main {
         Encoder CKKSEncoder = new Encoder(M, N, vectorA);
         Polynomial p1 = CKKSEncoder.sigma_inverse(vectorA);
         System.out.println("Polynomial p1: " + p1);
+        ComplexNumber[] vectorB = CKKSEncoder.sigma(p1);
+        System.out.println("Vector B:");
+        for(int i = 0; i < N; i++) {
+            System.out.println(vectorB[i] + " ");
+        }
     }
 }
