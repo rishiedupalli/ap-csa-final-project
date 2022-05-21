@@ -1,53 +1,57 @@
+// java imports
 import java.util.*;
+
+// math imports
+import math.*;
+
+// encoding imports
+import ckks.Encoder;
+
 
 public class Main {
     public static void main(String[] args) {
-        // Some Parameters
-        final int M = 8;
-        final int N = M / 2;
-        final ComplexNumber MthRoot = new PolarComplexNumber().yieldNthRootOfUnity(M);
-        ComplexNumber[] NthRootsOfUnity = new PolarComplexNumber().yieldNthRootsOfUnity(N);
-
-        ComplexNumber[] vector = new ComplexNumber[N];
-        for (int i = 0; i < N; i++) {
-            vector[i] = new ComplexNumber(i+1, 0);
-        }
-
-        Polynomial p = sigma_inverse(M, MthRoot, vector);
-        System.out.println(p);
-        ComplexNumber[] Output = sigma(M, p, MthRoot);
+        Scanner Input = new Scanner(System.in);
+        // take input integer M verfify positive power of 2
+        System.out.print("Enter M (Basis for Mth Root, basically basis for encryption. Positive integer M that is a power of 2): ");
         
-        for (ComplexNumber v_i : Output) {
-            System.out.println(v_i);
+        int M = Input.nextInt();
+        while(M <= 0 || (M & (M - 1)) != 0) {
+            System.out.println("Please enter a positive integer M that is a power of 2.");
+            System.out.print("Enter M (Basis for Mth Root, basically basis for encryption. Positive integer M that is a power of 2): ");
+            M = Input.nextInt();
         }
 
-        // print mth root of unity
+        ComplexNumber MthRootOfUnity = new PolarComplexNumber().getNthRootOfUnity(M);
+        System.out.println("Mth Root of Unity (Main): " + MthRootOfUnity);
 
-        // System.out.println("mth root of unity: " + MthRoot);
-        // // print nth roots of unity
-        // System.out.println("Nth roots of unity:");
-        // for (int i = 0; i < N; i++) {
-        //     System.out.println(NthRootsOfUnity[i]);
-        // }
-    }
+        int N = M / 2;
 
-    public static Polynomial sigma_inverse(int M, ComplexNumber MthRoot, ComplexNumber[] plaintext){
-        ComplexNumber[][] V = LinearAlgebra.ConstructVandermondeMatrix(M, MthRoot, plaintext);
-    
-        ComplexNumber[] PolynomialCoeffs = LinearAlgebra.Solve(V, plaintext);
-        return new Polynomial(PolynomialCoeffs);
-    }
-
-    public static ComplexNumber[] sigma(int M, Polynomial p, ComplexNumber MthRoot) {
-        ComplexNumber[] outputs = new ComplexNumber[M / 2];
-        for (int i = 0; i < M / 2; i++) {
-            outputs[i] = p.evaluate(MthRoot.pow(2 * i + 1));
+        ComplexNumber[] vectorA = new ComplexNumber[N];
+        System.out.println("Enter vector (A) of M / 2 complex numbers");
+        for(int i = 0; i < N; i++) {
+            System.out.print("Real Part: ");
+            double real = Input.nextDouble();
+            System.out.print("Real Imaginary: ");
+            double imaginary = Input.nextDouble();
+            vectorA[i] = new ComplexNumber(real, imaginary);
+            System.out.println();
         }
-        return outputs;
+
+        Input.close();
+        System.out.println("Vector A:");
+        for(int i = 0; i < N; i++) {
+            System.out.print(vectorA[i] + " ");
+        }
+        System.out.println();
+
+        System.out.println("M is: " + M);
+        Encoder CKKSEncoder = new Encoder(M, N, vectorA);
+        Polynomial p1 = CKKSEncoder.sigma_inverse(vectorA);
+        System.out.println("Polynomial p1: " + p1);
+        ComplexNumber[] vectorB = CKKSEncoder.sigma(p1);
+        System.out.println("Vector B:");
+        for(int i = 0; i < N; i++) {
+            System.out.println(vectorB[i] + " ");
+        }
     }
-
-
 }
-
-
-
