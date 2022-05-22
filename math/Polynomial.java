@@ -1,40 +1,34 @@
 package math;
 
+import org.apache.commons.math3.complex.*;
+import org.apache.commons.math3.linear.*;
+
 public class Polynomial {
-    // create a polynomial class with a private array of coefficients
-    private ComplexNumber[] coefficients;
+    private FieldVector<Complex> Coeffs;
     private int degree;
 
-    public Polynomial(ComplexNumber[] coefficients) {
-        this.coefficients = coefficients;
-        this.degree = coefficients.length - 1;
+    public Polynomial(FieldVector<Complex> Coeffs) {
+        this.Coeffs = Coeffs;
+        this.degree = Coeffs.getDimension() - 1;
     }
 
-    public Polynomial(int degree) {
-        this.degree = degree;
-        this.coefficients = new ComplexNumber[degree + 1];
-    }
-
-    public ComplexNumber evaluate(ComplexNumber x) {
-        ComplexNumber result = new ComplexNumber(0, 0);
-        for (int i = 0; i <= degree; i++) {
-            result = result.add(coefficients[i].multiply(x.exponentiate(i)));
+    public Complex eval(Complex x) {
+        Complex result = Complex.ZERO;
+        for(int i = 0; i <= degree; i++) {
+            result = result.add(Coeffs.getEntry(i).multiply(x.pow(i)));
         }
         return result;
     }
 
     @Override
     public String toString() {
-        // return the polynomial as a string in the form of "a0 + a1*x + a2*x^2 + ... + an*x^n"
-        String polynomial = "";
-        for (int i = 0; i < coefficients.length; i++) {
-            if (i == 0) {
-                polynomial += coefficients[i];
-            } else {
-                polynomial += " + (" + coefficients[i] + ")*x^" + i;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i <= degree; i++) {
+            sb.append(Coeffs.getEntry(i));
+            if(i != degree) {
+                sb.append(" + ");
             }
         }
-
-        return polynomial;
+        return sb.toString();
     }
 }

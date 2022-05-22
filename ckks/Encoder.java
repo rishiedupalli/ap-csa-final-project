@@ -1,39 +1,43 @@
 package ckks;
 
-// math imports
+import java.util.*;
+
+import org.apache.commons.math3.complex.*;
+import org.apache.commons.math3.analysis.polynomials.*;
+import org.apache.commons.math3.linear.*;
+
 import math.*;
 
 public class Encoder {
     int M;
     int N;
-    ComplexNumber MthRootOfUnity = null;
+    Complex MthRootOfUnity;
 
-    public Encoder(int M, int N, ComplexNumber[] vector) {
+    public Encoder(int M, int N) {
         this.M = M;
         this.N = N;
-        MthRootOfUnity = new PolarComplexNumber().getNthRootOfUnity(M);
+        this.MthRootOfUnity = Complex.valueOf(Math.cos(2 * Math.PI / M), Math.sin(2 * Math.PI / M));
     }
 
-    public Polynomial sigma_inverse(ComplexNumber[] b) {
-        System.out.println("Mth Root: " + MthRootOfUnity);
-        ComplexNumber[][] V = LinearAlgebra.ConstructVandermondeMatrix(M, N, MthRootOfUnity);
+    public Polynomial sigma_inverse(FieldVector<Complex> b) {
+        FieldMatrix<Complex> V = LinearAlgebra.ConstructVandermondeMatrix(M, N);
+        FieldLUDecomposition<Complex> Solver = new FieldLUDecomposition<Complex>(V);
+        FieldVector<Complex> Coeffs = Solver.getSolver().solve(b);
 
-        ComplexNumber[] Coefficients = LinearAlgebra.solve(N, V, b);
-
-        System.out.print("Coefficients: ");
-        for(int i = 0; i < Coefficients.length; i++) {
-            System.out.print("a_" + i + Coefficients[i] + " ");
-        }
-
-        return new Polynomial(Coefficients);
-    }
-
-    public ComplexNumber[] sigma(Polynomial p) {
-        ComplexNumber[] vector = new ComplexNumber[N];
+        System.out.println("Coefficients: ");
         for(int i = 0; i < N; i++) {
-            ComplexNumber root = MthRootOfUnity.exponentiate(2 * 1 + 1);
-            vector[i] = p.evaluate(root);
+            System.out.println("Coeff " + i + ": " + Coeffs.getEntry(i));
         }
-        return vector;
+
+        Polynomial p = new Polynomial(Coeffs);
+        return p;
+    }
+
+    public Complex[] sigma(Polynomial p) {
+        Complex[] output = new Complex[N];
+        for(int i = 0; i < N; i++) {
+            output[i] = p.eval(MthRootOfUnity.pow(2 * i + 1));
+        }
+        return output;
     }
 }
