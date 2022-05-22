@@ -1,9 +1,6 @@
 package ckks;
 
-import java.util.*;
-
 import org.apache.commons.math3.complex.*;
-import org.apache.commons.math3.analysis.polynomials.*;
 import org.apache.commons.math3.linear.*;
 
 import math.*;
@@ -21,13 +18,9 @@ public class Encoder {
 
     public Polynomial sigma_inverse(FieldVector<Complex> b) {
         FieldMatrix<Complex> V = LinearAlgebra.ConstructVandermondeMatrix(M, N);
+
         FieldLUDecomposition<Complex> Solver = new FieldLUDecomposition<Complex>(V);
         FieldVector<Complex> Coeffs = Solver.getSolver().solve(b);
-
-        System.out.println("Coefficients: ");
-        for(int i = 0; i < N; i++) {
-            System.out.println("Coeff " + i + ": " + Coeffs.getEntry(i));
-        }
 
         Polynomial p = new Polynomial(Coeffs);
         return p;

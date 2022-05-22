@@ -41,6 +41,8 @@ public class Main {
             System.out.println("Imaginary part of element" + (i + 1) + ": ");
             vectorBElements[i] = vectorBElements[i].add(new Complex(0, Input.nextDouble()));
         }
+
+        Input.close();
         
         FieldVector<Complex> vectorB = new ArrayFieldVector<Complex>(vectorBElements);
         Encoder CKKSEncoder = new Encoder(M, N);
