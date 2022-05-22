@@ -48,32 +48,13 @@ public class Main {
         System.out.println("p1: " + p1);
         Polynomial p2 = CKKSEncoder.sigma_inverse(vectorB);
         System.out.println("p2: " + p2);
+        Polynomial p3 = p1.addPolynomial(p2);
 
-        Complex[] decode1 = CKKSEncoder.sigma(p1);
-        Complex[] decode2 = CKKSEncoder.sigma(p2);
+        Complex[] decode = CKKSEncoder.sigma(p3);
 
-        System.out.println("Decode vector A: ");
+        System.out.println("Decode Addition: ");
         for(int i = 0; i < N; i++) {
-            System.out.println("Element " + (i + 1) + ": " + decode1[i]);
+            System.out.print(decode[i] + " ");
         }
-
-        System.out.println("Decode vector B: ");
-        for(int i = 0; i < N; i++) {
-            System.out.println("Element " + (i + 1) + ": " + decode2[i]);
-        }
-
-        // System.out.println("What Operation? (1: Addition, 2: Multiplication)");
-        // int operation = Input.nextInt();
-        // while(operation != 1 && operation != 2) {
-        //     System.out.println("What Operation? (1: Addition, 2: Multiplication)");
-        //     operation = Input.nextInt();
-        // }
-        // if (operation == 1) {
-        //     Polynomial p3 = p1.add(p2);
-        //     System.out.println("p3: " + p3);
-        // } else {
-        //     Polynomial p3 = p1.multiply(p2);
-        //     System.out.println("p3: " + p3);
-        // }
     }
 }
