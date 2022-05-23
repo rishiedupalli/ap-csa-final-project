@@ -31,13 +31,20 @@ public class Polynomial {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        // print out in form z0 + z1x + z2x^2 + ... + znx^n
+        String result = "";
         for(int i = 0; i <= degree; i++) {
-            sb.append(Coeffs.getEntry(i));
+            if(Coeffs.getEntry(i).getReal() != 0) {
+                result += Coeffs.getEntry(i).getReal() + " ";
+            }
+            if(Coeffs.getEntry(i).getImaginary() != 0) {
+                result += Coeffs.getEntry(i).getImaginary() + "i ";
+            }
             if(i != degree) {
-                sb.append(" + ");
+                result += "x^" + i + " + ";
             }
         }
-        return sb.toString();
+
+        return result;
     }
 }
