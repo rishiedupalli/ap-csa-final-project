@@ -26,9 +26,9 @@ public class Main {
 
         System.out.println("Enter vector A (M / 2): ");
         for(int i = 0; i < N; i++) {
-            System.out.println("Real part of element" + (i + 1) + ": ");
+            System.out.println("Real part of element: " + (i + 1) + ": ");
             vectorAElements[i] = new Complex(Input.nextDouble(), 0);
-            System.out.println("Imaginary part of element" + (i + 1) + ": ");
+            System.out.println("Imaginary part of element: " + (i + 1) + ": ");
             vectorAElements[i] = vectorAElements[i].add(new Complex(0, Input.nextDouble()));
         }
 
@@ -36,9 +36,9 @@ public class Main {
 
         System.out.println("Enter vector B (M / 2): ");
         for(int i = 0; i < N; i++) {
-            System.out.println("Real part of element" + (i + 1) + ": ");
+            System.out.println("Real part of element: " + (i + 1) + ": ");
             vectorBElements[i] = new Complex(Input.nextDouble(), 0);
-            System.out.println("Imaginary part of element" + (i + 1) + ": ");
+            System.out.println("Imaginary part of element: " + (i + 1) + ": ");
             vectorBElements[i] = vectorBElements[i].add(new Complex(0, Input.nextDouble()));
         }
 
@@ -54,9 +54,18 @@ public class Main {
 
         Complex[] decode = CKKSEncoder.sigma(p3);
 
-        System.out.println("Decode Addition: ");
-        for(int i = 0; i < N; i++) {
-            System.out.print(decode[i] + " ");
+        // print out vector A and B in one line and then decode
+        for (Complex a : vectorAElements) {
+            System.out.print(a + " ");
+        }
+        System.out.println(" + ");
+        for (Complex b : vectorBElements) {
+            System.out.print(b + " ");
+        }
+        
+        System.out.println(" = ");
+        for (Complex d : decode) {
+            System.out.print(d + " ");
         }
     }
 }
