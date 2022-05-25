@@ -34,14 +34,18 @@ public class Polynomial {
         // print out in form z0 + z1x + z2x^2 + ... + znx^n
         String result = "";
         for(int i = 0; i <= degree; i++) {
-            if(Coeffs.getEntry(i).getReal() != 0) {
-                result += Coeffs.getEntry(i).getReal() + " ";
-            }
-            if(Coeffs.getEntry(i).getImaginary() != 0) {
-                result += Coeffs.getEntry(i).getImaginary() + "i ";
-            }
-            if(i != degree) {
-                result += "x^" + i + " + ";
+            if(degree == 0) {
+                result += Coeffs.getEntry(i);
+            } else {
+                if(i == 0) {
+                    result += "(" +Coeffs.getEntry(i) + ")";
+                } else {
+                    if(Coeffs.getEntry(i).getReal() >= 0) {
+                        result += "+" + "(" + Coeffs.getEntry(i) + ")" + "x^" + i;
+                    } else {
+                        result += "-" + "(" + Coeffs.getEntry(i).abs() + ")" + "x^" + i;
+                    }
+                }
             }
         }
 
