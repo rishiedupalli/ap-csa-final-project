@@ -9,16 +9,9 @@ import ckks.*;
 public class Main {
     public static void main(String[] args) {
         Scanner Input = new Scanner(System.in);
-        System.out.println("CKKS Encryption");
+        System.out.println("CKKS Encoder/Decoder (V \\in C^n -> C[X]/(X^n + 1) -> V \\in C^n)");
 
-        System.out.print("Enter M ( M > 1 && M = 2^n for some real n): ");
-        int M = Input.nextInt();
-        while(M <= 1 || M != (int)Math.pow(2, Math.floor(Math.log(M) / Math.log(2)))) {
-            System.out.print("Enter M ( M > 1 && M = 2^n for some real n): ");
-            M = Input.nextInt();
-            System.out.println();
-        }
-
+        final int M = 8;
         final int N = M / 2;
 
         Complex[] vectorAElements = new Complex[N];
